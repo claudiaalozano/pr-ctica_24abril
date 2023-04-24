@@ -19,7 +19,7 @@ def apostar_par_impar(par_impar, saldo):
     saldo = 1000
     
     
-    par_impar = random.choice(1,36)
+    par_impar = random.randint(1,36)
     while True:
         saldo-=10
         if par_impar == "par" and random.randint(1,36)%2 == 0:
@@ -34,11 +34,12 @@ def jugar_martingala(saldo, numero):
     saldo = 1000
     
     numero = random.randint(1,36)
+    c = random.randint(1,36)
     
     apuesta=10
     while True:
         saldo = saldo- apuesta
-        if random.randint(1,36)== numero:
+        if c == numero:
             saldo += apuesta*36
             apuesta=10
         else:
@@ -60,7 +61,7 @@ def jugar():
         hilos.append(hilo)
 
     for i in range(4, 8):
-        par_impar = random.choice(["par", "impar"])
+        par_impar = random.randint(1,36)
         hilo = multiprocessing.Process(target=apostar_par_impar, args=(par_impar,saldo))
 
         hilos.append(hilo)
