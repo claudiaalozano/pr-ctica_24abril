@@ -2,18 +2,18 @@ import multiprocessing
 import random
 import time
 class Casino:
-    def __init__(self, saldo):
-        
-        self.saldo = saldo
-        
-
+    def __init__(self):
+        self.saldo = 1000
+        self.numero = random.randint(1,36)
+    
     def apostar(numero,saldo):
         while True:
             saldo -=10
             if random.randint(1,36) == numero:
                 saldo += 360
             if saldo<0:
-                break
+                None
+        
 
     def apostar_par_impar(par_impar, saldo):
         while True:
@@ -23,7 +23,8 @@ class Casino:
             elif par_impar == "impar" and random.randint(1,36)%2 == 1:
                 saldo += 20
             if saldo<0:
-                break
+                None
+        
 
     def jugar_martingala(saldo):
         numero = random.randint(1,36)
@@ -36,10 +37,11 @@ class Casino:
             else:
                 apuesta*=2
             if saldo<0:
-                break
+                None    
+            
 
 def jugar():
-    saldo = [1000 for _ in range(12)]
+    saldo = 1000
     casino = Casino()
     numero = random.randint(1,36)
 
