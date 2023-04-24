@@ -8,6 +8,5 @@ if __name__ == '__main__':
         main()
     
     elif ej == "casino":
-
         jugar()
     
