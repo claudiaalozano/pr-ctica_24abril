@@ -12,7 +12,7 @@ def apostar(numero,saldo):
         if random.randint(1,36) == numero:
             saldo += 360
         if saldo<0:
-            None
+            break
     
 
 def apostar_par_impar(par_impar, saldo):
@@ -27,7 +27,7 @@ def apostar_par_impar(par_impar, saldo):
         elif par_impar == "impar" and random.randint(1,36)%2 == 1:
             saldo += 20
         if saldo<0:
-            None
+            break
         
 
 def jugar_martingala(saldo, numero):
@@ -44,7 +44,7 @@ def jugar_martingala(saldo, numero):
         else:
             apuesta*=2
         if saldo<0:
-            None    
+            break    
             
 
 def jugar():
