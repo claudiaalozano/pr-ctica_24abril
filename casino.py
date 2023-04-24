@@ -7,6 +7,7 @@ class Casino:
         self.numero = random.randint(1,36)
     
     def apostar(numero,saldo):
+        
         while True:
             saldo -=10
             if random.randint(1,36) == numero:
@@ -16,6 +17,7 @@ class Casino:
         
 
     def apostar_par_impar(par_impar, saldo):
+        par_impar = random.choice(1,36)
         while True:
             saldo-=10
             if par_impar == "par" and random.randint(1,36)%2 == 0:
@@ -26,7 +28,7 @@ class Casino:
                 None
         
 
-    def jugar_martingala(saldo):
+    def jugar_martingala(saldo, numero):
         numero = random.randint(1,36)
         apuesta=10
         while True:
