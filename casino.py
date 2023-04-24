@@ -1,67 +1,72 @@
 import multiprocessing
 import random
 import time
-class Casino:
-    def __init__(self):
-        self.saldo = 1000
-        self.numero = random.randint(1,36)
+
     
-    def apostar(numero,saldo):
-        
-        while True:
-            saldo -=10
-            if random.randint(1,36) == numero:
-                saldo += 360
-            if saldo<0:
-                None
+def apostar(numero,saldo):
+    saldo = 1000
+    
+    numero = random.randint(1,36)
+    while True:
+        saldo -=10
+        if random.randint(1,36) == numero:
+            saldo += 360
+        if saldo<0:
+            None
+    
+
+def apostar_par_impar(par_impar, saldo):
+    saldo = 1000
+    
+    
+    par_impar = random.choice(1,36)
+    while True:
+        saldo-=10
+        if par_impar == "par" and random.randint(1,36)%2 == 0:
+            saldo += 20
+        elif par_impar == "impar" and random.randint(1,36)%2 == 1:
+            saldo += 20
+        if saldo<0:
+            None
         
 
-    def apostar_par_impar(par_impar, saldo):
-        par_impar = random.choice(1,36)
-        while True:
-            saldo-=10
-            if par_impar == "par" and random.randint(1,36)%2 == 0:
-                saldo += 20
-            elif par_impar == "impar" and random.randint(1,36)%2 == 1:
-                saldo += 20
-            if saldo<0:
-                None
-        
-
-    def jugar_martingala(saldo, numero):
-        numero = random.randint(1,36)
-        apuesta=10
-        while True:
-            saldo-=apuesta
-            if random.randint(1,36)== numero:
-                saldo += apuesta*36
-                apuesta=10
-            else:
-                apuesta*=2
-            if saldo<0:
-                None    
+def jugar_martingala(saldo, numero):
+    saldo = 1000
+    
+    numero = random.randint(1,36)
+    
+    apuesta=10
+    while True:
+        saldo = saldo- apuesta
+        if random.randint(1,36)== numero:
+            saldo += apuesta*36
+            apuesta=10
+        else:
+            apuesta*=2
+        if saldo<0:
+            None    
             
 
 def jugar():
     saldo = 1000
-    casino = Casino()
+    
     numero = random.randint(1,36)
 
     hilos=[]
     for i in range(4):
         numero= random.randint(1,36)
-        hilo = multiprocessing.Process(target=casino.apostar, args=(numero,saldo))
+        hilo = multiprocessing.Process(target=apostar, args=(numero,saldo))
 
         hilos.append(hilo)
 
     for i in range(4, 8):
         par_impar = random.choice(["par", "impar"])
-        hilo = multiprocessing.Process(target=casino.apostar_par_impar, args=(par_impar,saldo))
+        hilo = multiprocessing.Process(target=apostar_par_impar, args=(par_impar,saldo))
 
         hilos.append(hilo)
 
     for i in range(8, 12):
-        hilo = multiprocessing.Process(target=casino.jugar_martingala, args=(saldo,))
+        hilo = multiprocessing.Process(target=jugar_martingala, args=(saldo,))
 
         hilos.append(hilo)
 
